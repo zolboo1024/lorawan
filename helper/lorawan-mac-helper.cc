@@ -16,7 +16,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Author: Davide Magrin <magrinda@dei.unipd.it>
+ * Modified by: Zolboo Erdenebaatar <erdenebz@dickinson.edu>
  */
+
 
 #include "ns3/lorawan-mac-helper.h"
 #include "ns3/gateway-lora-phy.h"
@@ -52,6 +54,9 @@ LorawanMacHelper::SetDeviceType (enum DeviceType dt)
     case ED_A:
       m_mac.SetTypeId ("ns3::ClassAEndDeviceLorawanMac");
       break;
+    case ED_S:
+      m_mac.SetTypeId ("ns3::SecureEndDeviceLorawanMac");
+      break;
     }
   m_deviceType = dt;
 }
@@ -81,12 +86,39 @@ LorawanMacHelper::Create (Ptr<Node> node, Ptr<NetDevice> device) const
     {
       mac->GetObject<ClassAEndDeviceLorawanMac> ()->SetDeviceAddress (m_addrGen->NextAddress ());
     }
-
+  else if (m_deviceType == ED_S && m_addrGen != 0)
+    {
+      mac->GetObject<SecureEndDeviceLorawanMac> ()->SetDeviceAddress (m_addrGen->NextAddress ());
+    }
   // Add a basic list of channels based on the region where the device is
   // operating
-  if (m_deviceType == ED_A)
+  if (m_deviceType == ED_A )
     {
       Ptr<ClassAEndDeviceLorawanMac> edMac = mac->GetObject<ClassAEndDeviceLorawanMac> ();
+      switch (m_region)
+        {
+          case LorawanMacHelper::EU: {
+            ConfigureForEuRegion (edMac);
+            break;
+          }
+          case LorawanMacHelper::SingleChannel: {
+            ConfigureForSingleChannelRegion (edMac);
+            break;
+          }
+          case LorawanMacHelper::ALOHA: {
+            ConfigureForAlohaRegion (edMac);
+            break;
+          }
+          default: {
+            NS_LOG_ERROR ("This region isn't supported yet!");
+            break;
+          }
+        }
+    }
+  //if the device type is secure
+  else if (m_deviceType == ED_S)
+    {
+      Ptr<SecureEndDeviceLorawanMac> edMac = mac->GetObject<SecureEndDeviceLorawanMac> ();
       switch (m_region)
         {
           case LorawanMacHelper::EU: {

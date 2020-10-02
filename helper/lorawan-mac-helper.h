@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Author: Davide Magrin <magrinda@dei.unipd.it>
+ * Modified by: Zolboo Erdenebaatar <erdenebz@dickinson.edu>
  */
 
 #ifndef LORAWAN_MAC_HELPER_H
@@ -26,6 +27,7 @@
 #include "ns3/lora-phy.h"
 #include "ns3/lorawan-mac.h"
 #include "ns3/class-a-end-device-lorawan-mac.h"
+#include "ns3/secure-end-device-lorawan-mac.h"
 #include "ns3/lora-device-address-generator.h"
 #include "ns3/gateway-lorawan-mac.h"
 #include "ns3/node-container.h"
@@ -40,7 +42,7 @@ public:
   /**
    * Define the kind of device. Can be either GW (Gateway) or ED (End Device).
    */
-  enum DeviceType { GW, ED_A };
+  enum DeviceType { GW, ED_A, ED_S };
 
   /**
    * Define the operational region.

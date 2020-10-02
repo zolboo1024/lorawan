@@ -153,7 +153,7 @@ SecureEndDeviceLorawanMac::Receive (Ptr<Packet const> packet)
   packetCopy->RemoveHeader (mHdr);
 
   NS_LOG_DEBUG ("Mac Header: " << mHdr);
-
+    
   // Only keep analyzing the packet if it's downlink
   if (!mHdr.IsUplink ())
     {
