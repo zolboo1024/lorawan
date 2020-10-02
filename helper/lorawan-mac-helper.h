@@ -131,6 +131,11 @@ private:
   void ConfigureForEuRegion (Ptr<GatewayLorawanMac> gwMac) const;
 
   /**
+   * Perform region-specific configurations for the 868 MHz EU band.
+   */
+  void ConfigureForEuRegion (Ptr<SecureEndDeviceLorawanMac> gwMac) const;
+
+  /**
    * Apply configurations that are common both for the GatewayLorawanMac and the
    * ClassAEndDeviceLorawanMac classes.
    */
@@ -140,6 +145,11 @@ private:
    * Perform region-specific configurations for the SINGLECHANNEL band.
    */
   void ConfigureForSingleChannelRegion (Ptr<ClassAEndDeviceLorawanMac> edMac) const;
+
+  /**
+   * Perform region-specific configurations for the SINGLECHANNEL band.
+   */
+  void ConfigureForSingleChannelRegion (Ptr<SecureEndDeviceLorawanMac> edMac) const;
 
   /**
    * Perform region-specific configurations for the SINGLECHANNEL band.

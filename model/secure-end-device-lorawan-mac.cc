@@ -18,9 +18,7 @@
  * Author: Davide Magrin <magrinda@dei.unipd.it>
  *         Martina Capuzzo <capuzzom@dei.unipd.it>
  *
- * Modified by: Peggy Anderson <peggy.anderson@usask.ca>
- *              qiuyukang <b612n@qq.com>
- *              Zolboo Erdenebaatar <erdenebz@dickinson.edu>
+ * Modified by: Zolboo Erdenebaatar <erdenebz@dickinson.edu>
  */
 
 #include "ns3/secure-end-device-lorawan-mac.h"
@@ -153,7 +151,7 @@ SecureEndDeviceLorawanMac::Receive (Ptr<Packet const> packet)
   packetCopy->RemoveHeader (mHdr);
 
   NS_LOG_DEBUG ("Mac Header: " << mHdr);
-    
+
   // Only keep analyzing the packet if it's downlink
   if (!mHdr.IsUplink ())
     {

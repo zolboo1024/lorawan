@@ -8,6 +8,7 @@
 #include "ns3/end-device-lorawan-mac.h"
 #include "ns3/gateway-lorawan-mac.h"
 #include "ns3/simulator.h"
+#include "ns3/secure-end-device-lorawan-mac.h"
 #include "ns3/log.h"
 #include "ns3/constant-position-mobility-model.h"
 #include "ns3/lora-helper.h"
@@ -37,6 +38,7 @@ int main (int argc, char *argv[])
   LogComponentEnable ("LorawanMac", LOG_LEVEL_ALL);
   LogComponentEnable ("EndDeviceLorawanMac", LOG_LEVEL_ALL);
   LogComponentEnable ("ClassAEndDeviceLorawanMac", LOG_LEVEL_ALL);
+  LogComponentEnable ("SecureEndDeviceLorawanMac", LOG_LEVEL_ALL);
   LogComponentEnable ("GatewayLorawanMac", LOG_LEVEL_ALL);
   LogComponentEnable ("LogicalLoraChannelHelper", LOG_LEVEL_ALL);
   LogComponentEnable ("LogicalLoraChannel", LOG_LEVEL_ALL);
@@ -93,7 +95,7 @@ int main (int argc, char *argv[])
   *  Create End Devices  *
   ************************/
 
-  NS_LOG_INFO ("Creating the end device...");
+  NS_LOG_INFO ("Creating secure end devices...");
 
   // Create a set of nodes
   NodeContainer endDevices;
@@ -104,7 +106,7 @@ int main (int argc, char *argv[])
 
   // Create the LoraNetDevices of the end devices
   phyHelper.SetDeviceType (LoraPhyHelper::ED);
-  macHelper.SetDeviceType (LorawanMacHelper::ED_A);
+  macHelper.SetDeviceType (LorawanMacHelper::ED_S);
   helper.Install (phyHelper, macHelper, endDevices);
 
   /*********************
