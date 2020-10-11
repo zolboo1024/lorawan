@@ -213,7 +213,18 @@ private:
    * The RX1DROffset parameter value
    */
   uint8_t m_rx1DrOffset;
+  
+  /**
+   * DevNonce is a counter starting at 0 when the device is initially powered 
+   * up and incremented with  every  Join-request. 
+   */
+  uint16_t m_devnonce;
 
+  /**
+   * The DevEUIis a global end-device ID in IEEE EUI64 address space that 
+   * uniquely identifies the end-device
+   */
+  int64_t m_deveui;
 }; /* SecureEndDeviceLorawanMac */
 } /* namespace lorawan */
 } /* namespace ns3 */

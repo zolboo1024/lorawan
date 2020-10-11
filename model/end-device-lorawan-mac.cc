@@ -160,8 +160,6 @@ EndDeviceLorawanMac::Send (Ptr<Packet> packet)
                    "). Transmission canceled.");
       return;
     }
-
-  // If it is not possible to transmit now because of the duty cycle,
   // or because we are receiving, schedule a tx/retx later
 
   Time netxTxDelay = GetNextTransmissionDelay ();

@@ -25,7 +25,10 @@
 #include "ns3/end-device-lorawan-mac.h"
 #include "ns3/end-device-lora-phy.h"
 #include "ns3/log.h"
+#include <stdlib.h> /*For rand function to create the DevEUI*/
 #include <algorithm>
+#include <time.h> 
+#include <cstdint>
 
 namespace ns3 {
 namespace lorawan {
@@ -58,8 +61,13 @@ SecureEndDeviceLorawanMac::SecureEndDeviceLorawanMac () :
   m_closeFirstWindow.Cancel ();
   m_closeSecondWindow = EventId ();
   m_closeSecondWindow.Cancel ();
+  m_devnonce = 0;
+  srand (time(NULL));
+  m_deveui = rand()%INT64_MAX; /*Create a random DevEUI*/
   m_secondReceiveWindow = EventId ();
   m_secondReceiveWindow.Cancel ();
+  NS_LOG_DEBUG("DevNonce for this device: "<< m_devnonce);
+  NS_LOG_DEBUG("DevEUI for this device: "<<m_deveui);
 }
 
 SecureEndDeviceLorawanMac::~SecureEndDeviceLorawanMac ()
